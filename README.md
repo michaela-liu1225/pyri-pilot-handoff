@@ -3,7 +3,7 @@
 Upper Alder now has a usable briefing and persistent handoff alongside the existing Pine Ridge journey. The duty lead sees reported access constraints, the age and quality of local sensor evidence, and checks to carry into the next shift. The supplied reserve map stays in place.
 
 - [Live assessment demo](https://connectivity-yea-stick-join.trycloudflare.com) — username `reviewer`; password shared privately. The temporary URL requires the host computer, app and tunnel to remain running.
-- [Source repository](https://github.com/michaela-liu1225/pyri-pilot-handoff) — private; reviewers need access or a source archive.
+- [Source repository](https://github.com/michaela-liu1225/pyri-pilot-handoff) — public; no GitHub login is needed to read the source. The live demo uses its separate shared login.
 - [10-minute review guide](docs/REVIEW_GUIDE.md), [verification record](docs/VERIFICATION.md), [browser review and screenshots](docs/BROWSER_QA.md), [time and AI process](docs/PROCESS.md).
 
 This is a historical tabletop exercise. The reserve, sensors, reports and assessments are fictional or simulated. The application does not predict fire arrival, damage, or safe access.

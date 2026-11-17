@@ -1,6 +1,6 @@
 # Ten-minute presentation and live demo
 
-Use the deployed app and repository; no slide deck is needed. Share the demo password privately and provide reviewers repository access or a source ZIP before the call. Recheck the temporary URL shortly before presenting.
+Use the deployed app and repository; no slide deck is needed. Share the demo password privately and include the public repository link before the call. Reviewers can read the source without a GitHub login; the demo has its own shared login. Recheck the temporary URL shortly before presenting.
 
 | Time | Show | Explain |
 | --- | --- | --- |
