@@ -158,11 +158,12 @@ def create_app(database: Path | None = None, password_hash: str | None = None) -
 
     @api.get("/api/sites/{site_id}/briefing")
     async def briefing(site_id: str, snapshot: str = "briefing", weather_mode: Mode = "normal"):
-        site_for(site_id)
+        site = site_for(site_id)
         cutoff = snapshot_for(snapshot)
-        result = briefings.pine_ridge_briefing(cutoff, PINE, weather_mode) if site_id == "pine-ridge" else briefings.upper_alder_briefing(cutoff, weather_mode)
-        if result is None:
-            raise HTTPException(501, "Upper Alder is not onboarded yet. Implement its briefing and operator workflow.")
+        result = (briefings.pine_ridge_briefing(cutoff, PINE, weather_mode) if site_id == "pine-ridge"
+                  else briefings.reserve_briefing(site, cutoff, UPPER_FEEDS, UPPER_CONTEXT, weather_mode))
+        LOGGER.info("briefing_ready site=%s snapshot=%s weather=%s evidence_count=%s",
+                    site_id, snapshot, result["weather"].get("state", weather_mode), len(result["evidence"]))
         return result
 
     @api.post("/api/sites/{site_id}/handoffs", status_code=201)
