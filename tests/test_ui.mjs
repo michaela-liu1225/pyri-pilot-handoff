@@ -93,6 +93,8 @@ test("afternoon evidence renders zero, missingness, delay and uncertainty distin
   assert.doesNotMatch($("evidence").textContent, /FR-05/);
   assert.match($("sensors").textContent, /35 min old/);
   assert.match($("sensors").textContent, /87 °C.*quality suspect/);
+  assert.match($("weather-note").textContent, /TVL-095.*Archived TVL airport weather/);
+  assert.match($("weather-note").textContent, /Available.*23:48 UTC/);
   const rows = [...$("assessments").querySelectorAll("tr")];
   assert.match(rows.find((r) => r.textContent.includes("Meadow Yard")).textContent, /0%/);
   assert.match(rows.find((r) => r.textContent.includes("North Cache")).textContent, /Not assessed/);

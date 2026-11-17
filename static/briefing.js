@@ -155,9 +155,10 @@ function renderWeather(weather) {
   title.append(node("strong", "Optional weather"), badge(state));
   section.append(title);
   if (weather.record) {
-    section.append(node("p", value(weather.record.temperature_c, " °C") + " · Observed " + timestamp(weather.record.observed_at)));
+    section.append(node("p", value(weather.record.temperature_c, " °C")),
+      provenance(weather.record, weather.source || weather.record.source || "Weather source not recorded"));
     if (weather.age_minutes !== undefined) section.append(node("p", value(weather.age_minutes, " min old") +
-      " at the scenario cutoff. Available " + timestamp(weather.record.available_at) + ".", "source"));
+      " at the scenario cutoff.", "source"));
   } else section.append(node("p", "Weather is unknown. The core briefing and handoff remain available."));
   section.append(node("p", weather.interpretation || "This point sample does not establish current site conditions.", "small"));
 }
