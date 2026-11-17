@@ -79,7 +79,7 @@ def reserve_briefing(site: dict[str, Any], snapshot: dict[str, Any],
                 "title": sensor["name"] + ": incomplete or flagged history",
                 "detail": (str(sensor["flagged_count"]) + " flagged packet(s); "
                            + str(sensor["missing_samples_between_observations"]) + " missing scheduled samples between observations."),
-                "action": "Review the data gap or flagged readings before relying on this shift's trend.",
+                "action": "Review " + sensor["id"] + " data gaps or flagged readings before relying on this shift's trend.",
                 "evidence_ids": [r["id"] for r in sensor["flagged_examples"]],
             })
         if latest:

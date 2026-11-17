@@ -71,6 +71,13 @@ class UpperAlderJourney(unittest.TestCase):
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.json()["evidence_snapshot"]["weather"]["state"], "unavailable")
 
+    def test_handoff_suggestions_identify_each_sensor_check(self):
+        briefing = self.briefing()
+        actions = [item["action"] for item in briefing["attention"]]
+        self.assertEqual(len(actions), len(set(actions)))
+        for sensor_id in ["NODE-01", "NODE-02", "NODE-03"]:
+            self.assertIn(sensor_id, briefing["suggested_note"])
+
 
 if __name__ == "__main__":
     unittest.main()
