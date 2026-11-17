@@ -619,6 +619,15 @@ button, summary { transition: background-color 120ms ease, color 120ms ease; }
 @media (min-width: 901px) and (max-width: 1050px) {
   .workspace { grid-template-columns: 170px minmax(260px, 1fr) 370px; }
 }
+@media (min-width: 901px) {
+  body {
+    display: grid;
+    grid-template-rows: auto auto minmax(0, 1fr) auto;
+    height: 100svh;
+  }
+  .workspace { min-height: 0; height: auto; }
+  .map-wrap { min-height: 0; }
+}
 @media (max-width: 900px) {
   .decision-pane { display: block; }
 }
