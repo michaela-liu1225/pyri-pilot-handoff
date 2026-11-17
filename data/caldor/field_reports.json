@@ -1,0 +1,27 @@
+[
+  {
+    "id": "FR-01", "source_kind": "synthetic", "observer_role": "Site crew", "route_id": "intake-spur",
+    "observed_at": "2021-08-30T16:40:00Z", "available_at": "2021-08-30T16:50:00Z",
+    "status": "passable", "note": "Crew reached the intake via the spur. No blockage was observed at the gate."
+  },
+  {
+    "id": "FR-02", "source_kind": "synthetic", "observer_role": "Duty dispatcher", "route_id": "meadow-road",
+    "observed_at": "2021-08-30T17:30:00Z", "available_at": "2021-08-30T17:42:00Z",
+    "status": "passable", "note": "Crew confirmed the staging area was reachable at the time of the check."
+  },
+  {
+    "id": "FR-03", "source_kind": "synthetic", "observer_role": "Site crew", "route_id": "intake-spur",
+    "observed_at": "2021-08-30T21:35:00Z", "available_at": "2021-08-30T21:50:00Z",
+    "status": "blocked", "note": "A fallen tree blocks the spur. The crew has no verified alternate access."
+  },
+  {
+    "id": "FR-04", "source_kind": "synthetic", "observer_role": "Passing contractor", "route_id": "intake-spur",
+    "observed_at": "2021-08-30T22:25:00Z", "available_at": "2021-08-30T22:50:00Z",
+    "status": "unverified", "note": "The main road looked open from the junction. The contractor did not see the spur."
+  },
+  {
+    "id": "FR-05", "source_kind": "synthetic", "observer_role": "Duty dispatcher", "route_id": "intake-spur",
+    "observed_at": "2021-08-30T23:40:00Z", "available_at": "2021-08-31T00:20:00Z",
+    "status": "passable", "note": "Clearing crew reported that the spur reopened. The update reached the desk after handoff."
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature", "id": "unit-west",
+      "geometry": {"type": "Polygon", "coordinates": [[[-120.205, 38.798], [-120.177, 38.791], [-120.155, 38.808], [-120.177, 38.835], [-120.204, 38.823], [-120.205, 38.798]]]},
+      "properties": {"aoi_id": "upper-alder", "name": "West Ridge", "cover": "young mixed conifer", "management_priority": "high", "source_kind": "synthetic"}
+    },
+    {
+      "type": "Feature", "id": "unit-central",
+      "geometry": {"type": "Polygon", "coordinates": [[[-120.151, 38.811], [-120.121, 38.802], [-120.098, 38.821], [-120.108, 38.848], [-120.141, 38.847], [-120.151, 38.811]]]},
+      "properties": {"aoi_id": "upper-alder", "name": "Central Bench", "cover": "mature mixed conifer", "management_priority": "medium", "source_kind": "synthetic"}
+    },
+    {
+      "type": "Feature", "id": "unit-east",
+      "geometry": {"type": "Polygon", "coordinates": [[[-120.097, 38.836], [-120.079, 38.830], [-120.062, 38.843], [-120.069, 38.866], [-120.099, 38.864], [-120.097, 38.836]]]},
+      "properties": {"aoi_id": "upper-alder", "name": "East Intake Buffer", "cover": "riparian buffer", "management_priority": "high", "source_kind": "synthetic"}
+    }
+  ]
+}

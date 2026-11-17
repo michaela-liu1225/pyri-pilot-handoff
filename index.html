@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Pyri | Pilot workspace</title>
+    <link rel="stylesheet" href="/static/vendor/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="/static/styles.css" />
+    <script src="/static/vendor/leaflet/leaflet.js" defer></script>
+    <script src="/static/app.js" type="module"></script>
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand">
+        pyri<span class="brand-mark" aria-hidden="true">✳</span>
+      </div>
+      <div class="workspace-name">Pilot workspace</div>
+      <span class="replay-badge">Historical replay</span
+      ><span class="release">Candidate starter · v1.2</span>
+    </header>
+    <div class="toolbar">
+      <label
+        >Protected site<select
+          id="site"
+          aria-label="Protected site"
+        ></select></label
+      ><label
+        >Evidence cutoff<select
+          id="snapshot"
+          aria-label="Evidence cutoff"
+        ></select></label
+      ><label
+        >Weather feed replay<select
+          id="weather"
+          aria-label="Weather feed replay"
+        >
+          <option value="normal">Normal</option>
+          <option value="stale">Stale fixture</option>
+          <option value="unavailable">Unavailable fixture</option>
+        </select></label
+      ><button id="refresh">Refresh briefing</button>
+    </div>
+    <main class="workspace">
+      <aside class="context-pane" aria-label="Site context">
+        <div class="pane-heading">
+          <span class="eyebrow">Protected area</span>
+          <h1 id="map-site">Upper Alder Timber Reserve</h1>
+          <p id="map-count" class="muted">Loading locations…</p>
+        </div>
+        <div class="pane-body">
+          <h2>Map context</h2>
+          <label class="layer"
+            ><input id="layer-boundary" type="checkbox" checked /><span
+              class="legend-dot boundary"
+            ></span
+            >Reserve boundary</label
+          ><label class="layer"
+            ><input id="layer-assets" type="checkbox" checked /><span
+              class="legend-dot assets"
+            ></span
+            >Assets</label
+          ><label class="layer"
+            ><input id="layer-sensors" type="checkbox" checked /><span
+              class="legend-dot sensors"
+            ></span
+            >Sensor locations</label
+          >
+          <p class="muted small">
+            Locations are fictional. Sensor markers show placement only, not
+            coverage or live status.
+          </p>
+          <h2>Locations</h2>
+          <div id="map-objects" aria-label="Mapped locations"></div>
+          <div class="context-note">
+            <h2>Your evidence choices</h2>
+            <p>
+              Choose overlays, cards or charts that help the duty lead. No
+              evidence overlays are preselected.
+            </p>
+          </div>
+        </div>
+      </aside>
+      <section class="map-pane" aria-label="AOI map pane">
+        <div class="map-bar">
+          <span class="eyebrow">AOI overview</span>
+          <div>
+            <button id="fit-reserve" class="secondary" disabled>
+              Fit reserve</button
+            ><button id="fit-all" class="secondary" disabled>
+              Fit all locations
+            </button>
+          </div>
+        </div>
+        <div class="map-wrap">
+          <div id="map" role="region" aria-label="Protected reserve map"></div>
+          <p id="map-empty" class="map-empty">Loading site geometry…</p>
+          <div class="map-caption">
+            N ↑ &nbsp; Coarse terrain context · approx. 1 km samples
+          </div>
+        </div>
+        <p id="map-status" class="map-status" role="status"></p>
+      </section>
+      <aside class="decision-pane" aria-label="Briefing and handoff">
+        <div class="pane-heading">
+          <span class="eyebrow">Understand & hand over</span>
+          <h2 id="title">Loading briefing…</h2>
+          <p id="message" role="status" aria-live="polite"></p>
+        </div>
+        <section class="pane-body briefing">
+          <p id="summary"></p>
+          <p id="asof" class="muted small"></p>
+          <h3>Evidence</h3>
+          <ul id="evidence"></ul>
+          <div id="weather-note" class="notice"></div>
+          <p id="limits" class="muted small"></p>
+        </section>
+        <section class="pane-body handoff">
+          <h2>Shift handoff</h2>
+          <label
+            >Operator note<textarea
+              id="note"
+              maxlength="2000"
+              placeholder="What should the next shift check?"
+            ></textarea></label
+          ><button id="save" disabled>Save handoff</button>
+          <h3>Saved handoffs</h3>
+          <div id="saved"></div>
+        </section>
+      </aside>
+    </main>
+    <footer>
+      Tabletop exercise · not an operational safety system. Start with
+      README.md. <a href="/docs">API reference</a>
+    </footer>
+  </body>
+</html>

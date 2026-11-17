@@ -1,0 +1,4 @@
+[
+  {"id":"pine-ridge","name":"Pine Ridge Demonstration Site","status":"existing","objective":"Keep the existing shift briefing and handoff working.","source_kind":"synthetic"},
+  {"id":"upper-alder","name":"Upper Alder Timber Reserve","status":"new","objective":"Protect timber stands, communications and water supply; verify access before field work.","aoi_id":"upper-alder","source_kind":"synthetic"}
+]

@@ -1,0 +1,17 @@
+{
+  "source": "USGS 3DEP; see CALDOR_DATA.md",
+  "source_file": "data/caldor/historical/terrain_grid.csv",
+  "source_sha256": "9124c481067d235526a4b2e718acb42203db761b9b34c9796ce9dcb64ee9d54c",
+  "grid": [
+    47,
+    31
+  ],
+  "bounds_wgs84": [
+    -120.34,
+    38.73,
+    -119.87,
+    39.04
+  ],
+  "sample_spacing_degrees": 0.01,
+  "display": "Coarse shaded relief with interpolation for display only; not a high-resolution basemap, road map, fire layer or evidence assessment."
+}

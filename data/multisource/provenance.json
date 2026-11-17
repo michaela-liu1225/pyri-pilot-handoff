@@ -1,0 +1,168 @@
+{
+  "release": "1.0",
+  "retrieved_at": "2026-11-16T13:11:27.141234+00:00",
+  "grid": {
+    "crs": "EPSG:32610",
+    "width": 40,
+    "height": 32,
+    "bounds": [
+      741137.8937822513,
+      4295368.440996147,
+      756541.6334432338,
+      4308049.765450278
+    ],
+    "wgs84_query_bbox": [
+      -120.22,
+      38.774,
+      -120.047,
+      38.884
+    ],
+    "meaning": "Sparse nearest-neighbour samples of source pixels, not area averages or a new native resolution. No AOI polygon mask is applied."
+  },
+  "sources": [
+    {
+      "id": "S2B_MSIL2A_20210829T183919_R070_T10SGJ_20210830T065823",
+      "collection": "sentinel-2-l2a",
+      "observed_at": "2021-08-29T18:39:19Z",
+      "available_at": "2021-08-30T18:39:19Z",
+      "availability_kind": "synthetic replay availability, not verified historical delivery time",
+      "source_kind": "historical satellite extract",
+      "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/items/S2B_MSIL2A_20210829T183919_R070_T10SGJ_20210830T065823",
+      "assets": {
+        "B04": {
+          "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/10/S/GJ/2021/08/29/S2B_MSIL2A_20210829T183919_N0300_R070_T10SGJ_20210830T065823.SAFE/GRANULE/L2A_T10SGJ_A023405_20210829T184903/IMG_DATA/R10m/T10SGJ_20210829T183919_B04_10m.tif",
+          "native_resolution_m": 10,
+          "raster_metadata": []
+        },
+        "B08": {
+          "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/10/S/GJ/2021/08/29/S2B_MSIL2A_20210829T183919_N0300_R070_T10SGJ_20210830T065823.SAFE/GRANULE/L2A_T10SGJ_A023405_20210829T184903/IMG_DATA/R10m/T10SGJ_20210829T183919_B08_10m.tif",
+          "native_resolution_m": 10,
+          "raster_metadata": []
+        },
+        "SCL": {
+          "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/10/S/GJ/2021/08/29/S2B_MSIL2A_20210829T183919_N0300_R070_T10SGJ_20210830T065823.SAFE/GRANULE/L2A_T10SGJ_A023405_20210829T184903/IMG_DATA/R20m/T10SGJ_20210829T183919_SCL_20m.tif",
+          "native_resolution_m": 20,
+          "raster_metadata": []
+        }
+      }
+    },
+    {
+      "id": "LC08_L2SP_043033_20210821_02_T1",
+      "collection": "landsat-c2-l2",
+      "observed_at": "2021-08-21T18:39:40Z",
+      "available_at": "2021-08-28T18:39:40Z",
+      "availability_kind": "synthetic replay availability, not verified historical delivery time",
+      "source_kind": "historical satellite extract",
+      "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_043033_20210821_02_T1",
+      "assets": {
+        "lwir11": {
+          "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/oli-tirs/2021/043/033/LC08_L2SP_043033_20210821_20210827_02_T1/LC08_L2SP_043033_20210821_20210827_02_T1_ST_B10.TIF",
+          "native_resolution_m": 100,
+          "raster_metadata": [
+            {
+              "unit": "kelvin",
+              "scale": 0.00341802,
+              "nodata": 0,
+              "offset": 149,
+              "data_type": "uint16",
+              "spatial_resolution": 30
+            }
+          ]
+        },
+        "qa_pixel": {
+          "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/oli-tirs/2021/043/033/LC08_L2SP_043033_20210821_20210827_02_T1/LC08_L2SP_043033_20210821_20210827_02_T1_QA_PIXEL.TIF",
+          "native_resolution_m": null,
+          "raster_metadata": [
+            {
+              "unit": "bit index",
+              "nodata": 1,
+              "data_type": "uint16",
+              "spatial_resolution": 30
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "S2B_MSIL2A_20210809T183919_R070_T10SGJ_20210810T114450",
+      "collection": "sentinel-2-l2a",
+      "observed_at": "2021-08-09T18:39:19Z",
+      "available_at": "2021-08-10T18:39:19Z",
+      "availability_kind": "synthetic replay availability, not verified historical delivery time",
+      "source_kind": "historical satellite extract",
+      "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/items/S2B_MSIL2A_20210809T183919_R070_T10SGJ_20210810T114450",
+      "assets": {
+        "B04": {
+          "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/10/S/GJ/2021/08/09/S2B_MSIL2A_20210809T183919_N0300_R070_T10SGJ_20210810T114450.SAFE/GRANULE/L2A_T10SGJ_A023119_20210809T184900/IMG_DATA/R10m/T10SGJ_20210809T183919_B04_10m.tif",
+          "native_resolution_m": 10,
+          "raster_metadata": []
+        },
+        "B08": {
+          "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/10/S/GJ/2021/08/09/S2B_MSIL2A_20210809T183919_N0300_R070_T10SGJ_20210810T114450.SAFE/GRANULE/L2A_T10SGJ_A023119_20210809T184900/IMG_DATA/R10m/T10SGJ_20210809T183919_B08_10m.tif",
+          "native_resolution_m": 10,
+          "raster_metadata": []
+        },
+        "SCL": {
+          "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/10/S/GJ/2021/08/09/S2B_MSIL2A_20210809T183919_N0300_R070_T10SGJ_20210810T114450.SAFE/GRANULE/L2A_T10SGJ_A023119_20210809T184900/IMG_DATA/R20m/T10SGJ_20210809T183919_SCL_20m.tif",
+          "native_resolution_m": 20,
+          "raster_metadata": []
+        }
+      }
+    },
+    {
+      "id": "LC08_L2SP_043033_20210805_02_T1",
+      "collection": "landsat-c2-l2",
+      "observed_at": "2021-08-05T18:39:35Z",
+      "available_at": "2021-08-12T18:39:35Z",
+      "availability_kind": "synthetic replay availability, not verified historical delivery time",
+      "source_kind": "historical satellite extract",
+      "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC08_L2SP_043033_20210805_02_T1",
+      "assets": {
+        "lwir11": {
+          "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/oli-tirs/2021/043/033/LC08_L2SP_043033_20210805_20210811_02_T1/LC08_L2SP_043033_20210805_20210811_02_T1_ST_B10.TIF",
+          "native_resolution_m": 100,
+          "raster_metadata": [
+            {
+              "unit": "kelvin",
+              "scale": 0.00341802,
+              "nodata": 0,
+              "offset": 149,
+              "data_type": "uint16",
+              "spatial_resolution": 30
+            }
+          ]
+        },
+        "qa_pixel": {
+          "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/oli-tirs/2021/043/033/LC08_L2SP_043033_20210805_20210811_02_T1/LC08_L2SP_043033_20210805_20210811_02_T1_QA_PIXEL.TIF",
+          "native_resolution_m": null,
+          "raster_metadata": [
+            {
+              "unit": "bit index",
+              "nodata": 1,
+              "data_type": "uint16",
+              "spatial_resolution": 30
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "synthetic_sources": [
+    "point_sensor_observations.csv",
+    "point_sensors.geojson",
+    "viirs_like_detections.csv"
+  ],
+  "methods": {
+    "sentinel2": "Processing baseline N0300: red and NIR DN / 10000; NDVI=(NIR-red)/(NIR+red). Keep only SCL 4/5/6 for the derived index; this simple mask does not guarantee smoke-free or high-quality data.",
+    "landsat8": "ST_B10 DN * 0.00341802 + 149 K, then subtract 273.15. Mask fill, dilated cloud, cirrus, cloud, shadow and snow QA_PIXEL bits 0-5 and zero DN. Does not use all uncertainty/quality bands; values remain illustrative context.",
+    "sampling": "40x32 nearest-neighbour grid over AOI bounding box. Cell spacing is not native resolution; values sample source pixels, not cell means. Some sample centers lie outside the AOI polygon.",
+    "availability": "S2 observation +24 hours and Landsat observation +7 days are synthetic replay publication assumptions. Real acquisition times/values and archive scene IDs are retained."
+  },
+  "file_sha256": {
+    "landsat8_thermal_samples.csv": "a900aa75896a3c77a0885cf677f8f66f611a4719760e44608ff9e1a2f7d5b3a1",
+    "point_sensors.geojson": "100e93dbea9992f2c19853870c29afcd6c89ad78ede73433e5c06fb8b995f256",
+    "point_sensor_observations.csv": "6ccfbfb102b425a1ebc626f0b3e14d1cc09ee9ddb25dd262250e243681065323",
+    "sentinel2_optical_samples.csv": "df6e4106bf0da775e960b4be3d74ffeef07653132e790e59a895d86137e4ccce",
+    "viirs_like_detections.csv": "68243f0db526a391febeb2f7ff422a1a70cc6f329a4809f20bbbf05248a642e7"
+  }
+}

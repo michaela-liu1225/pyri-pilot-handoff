@@ -1,0 +1,56 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "NODE-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -120.11,
+          38.82
+        ]
+      },
+      "properties": {
+        "name": "Central timber plot",
+        "source_kind": "synthetic",
+        "nominal_interval_minutes": 5,
+        "measurement_support": "local point; not a reserve-wide or satellite-pixel average"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "NODE-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -120.073,
+          38.847
+        ]
+      },
+      "properties": {
+        "name": "Intake approach",
+        "source_kind": "synthetic",
+        "nominal_interval_minutes": 5,
+        "measurement_support": "local point; not a reserve-wide or satellite-pixel average"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "NODE-03",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -120.175,
+          38.815
+        ]
+      },
+      "properties": {
+        "name": "West timber plot",
+        "source_kind": "synthetic",
+        "nominal_interval_minutes": 5,
+        "measurement_support": "local point; not a reserve-wide or satellite-pixel average"
+      }
+    }
+  ]
+}

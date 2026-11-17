@@ -1,0 +1,38 @@
+[
+  {
+    "id": "CF-0829-AM", "available_at": "2021-08-29T14:45:00Z",
+    "reported_acres": 156515, "containment_pct": 19,
+    "summary": "The northeast and west were the most active areas. Terrain and weakened trees were hazards for crews.",
+    "source_url": "https://www.fire.ca.gov/incidents/2021/8/14/caldor-fire/updates/4aca7c43-b476-4335-b338-76f89bfb8a43"
+  },
+  {
+    "id": "CF-0830-AM", "available_at": "2021-08-30T15:22:00Z",
+    "reported_acres": 177260, "containment_pct": 14,
+    "summary": "Officials described little overnight humidity recovery, active fire in the northeastern divisions, and Highway 50 closures.",
+    "source_url": "https://www.fire.ca.gov/incidents/2021/8/14/caldor-fire/updates/cae9f9f6-85b9-4f27-af9d-7c7c284f945f"
+  },
+  {
+    "id": "CF-0830-1059", "available_at": "2021-08-30T17:59:00Z",
+    "reported_acres": 177260, "containment_pct": 14,
+    "summary": "An evacuation update extended orders to several South Lake Tahoe neighborhoods.",
+    "source_url": "https://www.fire.ca.gov/incidents/2021/8/14/caldor-fire/updates/fd8dd97a-298c-488c-9235-ae8b803bffa6"
+  },
+  {
+    "id": "CF-0830-1145", "available_at": "2021-08-30T18:45:00Z",
+    "reported_acres": 177260, "containment_pct": 14,
+    "summary": "Another evacuation update added parts of Heavenly and the Stateline area.",
+    "source_url": "https://www.fire.ca.gov/incidents/2021/8/14/caldor-fire/updates/979a8a6d-05f9-4948-a9ac-3b60c81c76e5"
+  },
+  {
+    "id": "CF-0830-PM", "available_at": "2021-08-31T03:46:00Z",
+    "reported_acres": 186568, "containment_pct": 15,
+    "summary": "The evening update revised the incident-wide size and containment figures.",
+    "source_url": "https://www.fire.ca.gov/incidents/2021/8/14/caldor-fire/updates/0d5be759-771b-4d49-8c18-8604edafeacf"
+  },
+  {
+    "id": "CF-0831-AM", "available_at": "2021-08-31T14:37:00Z",
+    "reported_acres": 191607, "containment_pct": 15,
+    "summary": "Fire remained active overnight in the east and northeast. Officials described strong winds in lower canyons.",
+    "source_url": "https://www.fire.ca.gov/incidents/2021/8/14/caldor-fire/updates/392033f4-1610-4a94-b46d-67dfbc7671a4"
+  }
+]

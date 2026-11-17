@@ -1,0 +1,5 @@
+target_id,assessment_id,assessed_at,available_at,model,indicator,unit,value
+upper-alder,EX-00,2021-08-30T15:30:00Z,2021-08-30T16:15:00Z,tabletop-overlap-v1,scenario_footprint_overlap,percent,22
+ridge-relay,EX-01,2021-08-30T15:30:00Z,2021-08-30T16:15:00Z,tabletop-overlap-v1,scenario_footprint_overlap,percent,65
+echo-intake,EX-02,2021-08-30T15:30:00Z,2021-08-30T16:15:00Z,tabletop-overlap-v1,scenario_footprint_overlap,percent,12
+meadow-yard,EX-03,2021-08-30T15:30:00Z,2021-08-30T16:15:00Z,tabletop-overlap-v1,scenario_footprint_overlap,percent,0

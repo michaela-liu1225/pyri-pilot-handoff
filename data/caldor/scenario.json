@@ -1,0 +1,11 @@
+{
+  "id": "caldor-tabletop",
+  "title": "Caldor tabletop",
+  "aoi_id": "upper-alder",
+  "timezone": "America/Los_Angeles",
+  "bounds_wgs84": [-120.34, 38.73, -119.87, 39.04],
+  "snapshots": [
+    {"id": "briefing", "label": "Morning briefing", "as_of": "2021-08-30T18:00:00Z"},
+    {"id": "handoff", "label": "Afternoon handoff", "as_of": "2021-08-31T00:00:00Z"}
+  ]
+}

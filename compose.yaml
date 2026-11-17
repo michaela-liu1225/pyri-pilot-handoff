@@ -1,0 +1,20 @@
+services:
+  app:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      DEMO_PASSWORD_SHA256: ${DEMO_PASSWORD_SHA256:?Run python scripts/setup_demo.py first}
+    volumes:
+      - handoffs:/app/runtime
+    restart: unless-stopped
+  preview:
+    image: cloudflare/cloudflared:2026.11.0
+    profiles: [preview]
+    command: tunnel --no-autoupdate --protocol http2 --url http://app:8000
+    depends_on:
+      app:
+        condition: service_healthy
+    restart: unless-stopped
+volumes:
+  handoffs:

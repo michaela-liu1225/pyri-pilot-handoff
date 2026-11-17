@@ -1,0 +1,19 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature", "id": "upper-alder",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[-120.215, 38.786], [-120.174, 38.774], [-120.118, 38.788], [-120.071, 38.814], [-120.047, 38.842], [-120.061, 38.879], [-120.111, 38.884], [-120.155, 38.860], [-120.199, 38.844], [-120.220, 38.815], [-120.215, 38.786]]]
+      },
+      "properties": {
+        "name": "Upper Alder Timber Reserve",
+        "source_kind": "synthetic",
+        "objective": "Protect the timber stands, keep communications and water supply available, and verify crew access before field work.",
+        "on_site_assets": ["ridge-relay", "echo-intake"],
+        "support_assets": ["meadow-yard", "north-cache"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature", "id": "SIM-01",
+      "geometry": {"type": "Polygon", "coordinates": [[[-120.295, 38.780], [-120.226, 38.777], [-120.163, 38.808], [-120.153, 38.837], [-120.223, 38.865], [-120.295, 38.780]]]},
+      "properties": {"source_kind": "synthetic", "kind": "mapped_footprint", "observed_at": "2021-08-30T15:50:00Z", "available_at": "2021-08-30T16:25:00Z", "note": "Fictional mapped extent for the exercise."}
+    },
+    {
+      "type": "Feature", "id": "SIM-02",
+      "geometry": {"type": "Polygon", "coordinates": [[[-120.295, 38.780], [-120.220, 38.775], [-120.094, 38.811], [-120.069, 38.837], [-120.152, 38.881], [-120.223, 38.867], [-120.295, 38.780]]]},
+      "properties": {"source_kind": "synthetic", "kind": "mapped_footprint", "observed_at": "2021-08-30T21:15:00Z", "available_at": "2021-08-30T22:15:00Z", "note": "Fictional revised mapped extent. Geometry is approximate."}
+    },
+    {
+      "type": "Feature", "id": "SIM-03",
+      "geometry": {"type": "Point", "coordinates": [-120.071, 38.847]},
+      "properties": {"source_kind": "synthetic", "kind": "thermal_detection", "observed_at": "2021-08-30T20:58:00Z", "available_at": "2021-08-30T21:30:00Z", "nominal_resolution_m": 375, "confirmation": "unconfirmed", "note": "Fictional detection near the intake. A point represents a coarse pixel, rather than a precise fire location."}
+    }
+  ]
+}

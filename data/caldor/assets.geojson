@@ -1,0 +1,25 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature", "id": "ridge-relay",
+      "geometry": {"type": "Point", "coordinates": [-120.173, 38.811]},
+      "properties": {"name": "Ridge Relay", "kind": "communications", "criticality": "high", "route_ids": ["west-track"], "source_kind": "synthetic"}
+    },
+    {
+      "type": "Feature", "id": "echo-intake",
+      "geometry": {"type": "Polygon", "coordinates": [[[-120.075, 38.834], [-120.058, 38.834], [-120.058, 38.845], [-120.075, 38.845], [-120.075, 38.834]]]},
+      "properties": {"name": "Echo Intake", "kind": "water supply", "criticality": "high", "route_ids": ["intake-spur"], "source_kind": "synthetic"}
+    },
+    {
+      "type": "Feature", "id": "meadow-yard",
+      "geometry": {"type": "Point", "coordinates": [-119.965, 38.927]},
+      "properties": {"name": "Meadow Yard", "kind": "logistics", "criticality": "medium", "route_ids": ["meadow-road"], "source_kind": "synthetic"}
+    },
+    {
+      "type": "Feature", "id": "north-cache",
+      "geometry": {"type": "Point", "coordinates": [-120.054, 38.953]},
+      "properties": {"name": "North Cache", "kind": "equipment store", "criticality": "medium", "route_ids": [], "source_kind": "synthetic"}
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+id,longitude,latitude,observed_at,available_at,confidence,frp_mw,nominal_pixel_m,source_kind,note
+VIIRS-SIM-01,-120.2,38.79,2021-08-30T09:15:00Z,2021-08-30T10:10:00Z,nominal,8.2,375,synthetic_product_like,"Invented VIIRS-like detection, not a NASA observation; no detection is not evidence of no fire."
+VIIRS-SIM-02,-120.17,38.81,2021-08-30T09:15:00Z,2021-08-30T10:10:00Z,low,4.5,375,synthetic_product_like,"Invented VIIRS-like detection, not a NASA observation; no detection is not evidence of no fire."
+VIIRS-SIM-03,-120.11,38.84,2021-08-30T21:08:00Z,2021-08-30T22:03:00Z,high,18.1,375,synthetic_product_like,"Invented VIIRS-like detection, not a NASA observation; no detection is not evidence of no fire."
+VIIRS-SIM-04,-120.07,38.85,2021-08-30T21:08:00Z,2021-08-30T22:03:00Z,nominal,10.2,375,synthetic_product_like,"Invented VIIRS-like detection, not a NASA observation; no detection is not evidence of no fire."

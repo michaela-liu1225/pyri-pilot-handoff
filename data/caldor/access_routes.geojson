@@ -1,0 +1,20 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature", "id": "west-track",
+      "geometry": {"type": "LineString", "coordinates": [[-120.211, 38.842], [-120.196, 38.825], [-120.173, 38.811]]},
+      "properties": {"name": "West Track", "source_kind": "synthetic"}
+    },
+    {
+      "type": "Feature", "id": "intake-spur",
+      "geometry": {"type": "LineString", "coordinates": [[-120.045, 38.862], [-120.061, 38.853], [-120.066, 38.840]]},
+      "properties": {"name": "Intake Spur", "source_kind": "synthetic"}
+    },
+    {
+      "type": "Feature", "id": "meadow-road",
+      "geometry": {"type": "LineString", "coordinates": [[-119.983, 38.919], [-119.972, 38.922], [-119.965, 38.927]]},
+      "properties": {"name": "Meadow Road", "source_kind": "synthetic"}
+    }
+  ]
+}

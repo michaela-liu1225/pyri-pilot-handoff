@@ -1,0 +1,9 @@
+{
+  "source_kind":"synthetic",
+  "reports":[
+    {"id":"PR-01","observed_at":"2021-08-30T16:00:00Z","available_at":"2021-08-30T16:10:00Z","source":"Pine Ridge site crew","note":"Gate inspection completed; no access blockage observed at that time."}
+  ],
+  "weather":[
+    {"id":"PR-W01","observed_at":"2021-08-30T17:00:00Z","available_at":"2021-08-30T17:10:00Z","source":"Synthetic site weather station","temperature_c":24.0,"wind_speed_kt":8.0}
+  ]
+}

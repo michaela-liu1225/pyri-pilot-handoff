@@ -1,0 +1,8 @@
+{
+  "source_sha256": {
+    "iem-metar.csv": "d06055c859a9c666f27835071baf122082fa46c1aa88b3b2a94d7b9547909bbe",
+    "noaa-daily.csv": "43614f4891b91ad21fe8b2abdc4bdde9b6eb2d867deb163f84e8469dd88d68ca",
+    "usgs-elevation.tif": "cd44c03c170215677daf0880de783759c821bb52ac6115dffeb75b990e9db8a1",
+    "nifc-final.geojson": "1ae9cc452efc9d5d08fa06514eaf085efba9ae1f9cd024e8b874908bb40378ab"
+  }
+}

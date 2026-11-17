@@ -1,0 +1,26 @@
+[
+  {
+    "id": "reserve-plan-1", "target_id": "upper-alder", "source_kind": "synthetic", "owner_role": "Reserve duty lead",
+    "effective_from": "2021-08-24T00:00:00Z", "required_minutes": 90,
+    "step": "Confirm relay and intake status. Brief field crews on verified access to the timber units before assigning checks.",
+    "access_required": true, "required_route_id": "intake-spur"
+  },
+  {
+    "id": "relay-plan-2", "target_id": "ridge-relay", "source_kind": "synthetic", "owner_role": "Network duty lead",
+    "effective_from": "2021-08-24T00:00:00Z", "required_minutes": 75,
+    "step": "Verify remote telemetry and prepare to switch traffic to the backup relay.",
+    "access_required": false
+  },
+  {
+    "id": "intake-plan-1", "target_id": "echo-intake", "source_kind": "synthetic", "owner_role": "Water operations lead",
+    "effective_from": "2021-08-24T00:00:00Z", "required_minutes": 60,
+    "step": "Verify intake status and prepare the backup supply with the duty supervisor.",
+    "access_required": true, "required_route_id": "intake-spur"
+  },
+  {
+    "id": "yard-plan-1", "target_id": "meadow-yard", "source_kind": "synthetic", "owner_role": "Logistics lead",
+    "effective_from": "2021-08-24T00:00:00Z", "required_minutes": 35,
+    "step": "Check equipment and confirm that the staging area can receive crews.",
+    "access_required": true, "required_route_id": "meadow-road"
+  }
+]
