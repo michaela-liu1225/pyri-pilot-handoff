@@ -2,10 +2,11 @@
 
 ## Automated checks
 
-- **21 Python tests passed:** all 9 starter tests plus 9 evidence-rule and 3 Upper Alder API tests.
+- **22 Python tests passed:** all 9 starter tests plus 9 evidence-rule and 4 Upper Alder API tests.
 - **5 DOM workflow tests passed:** rendering/provenance, draft and saved-state handling, opening a saved handoff after briefing failure, ignoring an obsolete response, and accurate feedback when saving succeeds but history reload fails.
-- GitHub Actions repeats both suites on pushes and pull requests with pinned action commits, Python 3.12 and Node 22. [Initial successful run](https://github.com/michaela-liu1225/pyri-pilot-handoff/actions/runs/44143263111) validated commit `9e2fb17`; use the [Actions tab](https://github.com/michaela-liu1225/pyri-pilot-handoff/actions) for the current release result.
-- Local execution used Python 3.13.9 and Node 20.17.0. The latest provenance fix passed the same five DOM tests.
+- **6 real-browser tests passed:** responsive layout/map controls, saved-state/draft/weather flows, save/history failures, in-flight editing protection, mobile/tablet controls, and obsolete history response handling. See [BROWSER_QA.md](BROWSER_QA.md).
+- GitHub Actions repeats all three suites on pushes and pull requests with pinned action commits, Python 3.12 and Node 22. [Initial successful run](https://github.com/michaela-liu1225/pyri-pilot-handoff/actions/runs/44143263111) validated commit `9e2fb17`; use the [Actions tab](https://github.com/michaela-liu1225/pyri-pilot-handoff/actions) for the current release result.
+- Local execution used Python 3.13.9 and Node 20.17.0. Browser follow-up used Playwright 1.65.1 and Chromium 159.0.8154.6, with screenshot review of the deployed HTTPS instance.
 
 ## Consequential expected outcomes
 
@@ -38,6 +39,6 @@ Private runtime logs and machine-readable check results remain under ignored `ru
 
 ## Coverage boundaries
 
-A real browser could not be controlled in this session. DOM tests stub transport and the supplied map, so they do not verify layout, Leaflet rendering, keyboard/screen-reader behavior or usability. The page and bundled resources were served successfully, but no screenshot or recording is offered as evidence of visual QA. Complete a browser walkthrough before presenting.
+The initial release had only DOM/HTTP checks. The requested follow-up completed real Chromium layout and interaction checks against the HTTPS demo, with [reviewed screenshots and regression details](BROWSER_QA.md). DOM checks remain a narrower layer; full screen-reader, cross-browser and human-usability validation is not claimed. Browser-created saved evidence was also compared unchanged after an actual application-process restart.
 
 Docker was not available and its unchanged alternative deployment path was not exercised. There is no production load test, malicious-client audit, customer outcome measurement or claim that simulated evidence validates real-world fire decisions.

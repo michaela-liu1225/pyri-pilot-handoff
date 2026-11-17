@@ -4,7 +4,7 @@ Upper Alder now has a usable briefing and persistent handoff alongside the exist
 
 - [Live assessment demo](https://connectivity-yea-stick-join.trycloudflare.com) — username `reviewer`; password shared privately. The temporary URL requires the host computer, app and tunnel to remain running.
 - [Source repository](https://github.com/michaela-liu1225/pyri-pilot-handoff) — private; reviewers need access or a source archive.
-- [10-minute review guide](docs/REVIEW_GUIDE.md), [verification record](docs/VERIFICATION.md), [time and AI process](docs/PROCESS.md).
+- [10-minute review guide](docs/REVIEW_GUIDE.md), [verification record](docs/VERIFICATION.md), [browser review and screenshots](docs/BROWSER_QA.md), [time and AI process](docs/PROCESS.md).
 
 This is a historical tabletop exercise. The reserve, sensors, reports and assessments are fictional or simulated. The application does not predict fire arrival, damage, or safe access.
 
@@ -33,7 +33,7 @@ The starter already supplied FastAPI, raw feeds, site/context configuration, the
 | New reserve briefing, ordered attention and authored-plan links | [`briefings.py`](briefings.py): `reserve_briefing`; dispatch/logging in [`app.py`](app.py) |
 | Source disclosures, uncertainty and saved-state display | [`static/briefing.js`](static/briefing.js), [`index.html`](index.html), [`static/styles.css`](static/styles.css) |
 | Draft preservation, explicit suggestions, immutable saved views and stale-response protection | [`static/app.js`](static/app.js) |
-| Focused evidence/API/DOM checks and CI | [`tests/test_evidence.py`](tests/test_evidence.py), [`tests/test_upper_alder.py`](tests/test_upper_alder.py), [`tests/test_ui.mjs`](tests/test_ui.mjs), [workflow](.github/workflows/verify.yml) |
+| Focused evidence/API/DOM checks and CI | [`tests/test_evidence.py`](tests/test_evidence.py), [`tests/test_upper_alder.py`](tests/test_upper_alder.py), [`tests/test_ui.mjs`](tests/test_ui.mjs), [`tests/test_browser.mjs`](tests/test_browser.mjs), [workflow](.github/workflows/verify.yml) |
 
 The supplied `static/map.js`, data and storage implementation are retained. No new map engine or risk model was introduced. Source records remain packaged locally; no external dataset was added. Original attribution and provenance remain in [SOURCE_CATALOG.md](SOURCE_CATALOG.md), [CALDOR_DATA.md](CALDOR_DATA.md) and `data/`.
 
@@ -65,14 +65,16 @@ python -m uvicorn app:app --host 127.0.0.1 --port 8000
 
 Open `http://127.0.0.1:8000`. This development command has no login by default; keep it on loopback. For Windows, activation and equivalent commands are in [the original README](https://github.com/michaela-liu1225/pyri-pilot-handoff/blob/starter-v1.2/README.md).
 
-Optional DOM tests require Node 20+ (CI uses 22). With the Python environment active:
+Optional UI checks require Node 20+ (CI uses 22). With the Python environment active:
 
 ```sh
 npm ci --ignore-scripts --no-fund --no-audit
 npm run test:ui
+npx playwright install chromium
+npm run test:browser
 ```
 
-The suite contains **21 Python tests** (all 9 supplied tests retained) and **5 DOM workflow tests**. The latter exercise the actual controller/renderer with transport and the supplied map stubbed; they do not constitute visual browser QA. See [verification](docs/VERIFICATION.md) for the live service restart and HTTPS checks.
+The suite contains **22 Python tests** (all 9 supplied tests retained), **5 DOM workflow tests**, and **6 real-browser tests**. DOM tests stub transport and the map; browser tests exercise real Chromium, Leaflet and a fresh authenticated API/database. Browser visual review and deployed save/reopen checks are documented with [screenshots](docs/BROWSER_QA.md). See [verification](docs/VERIFICATION.md) for the live service restart and HTTPS checks.
 
 For a protected demo, stop the development server first:
 
@@ -87,14 +89,14 @@ Setup prints a new private password and writes only its hash to ignored `.env`; 
 
 ## Review history and limits
 
-`starter-v1.2` preserves the exact starter; changes are separated into evidence, briefing/API, UI, CI, a provenance fix, and documentation commits. The original instructions are preserved at [the starter tag](https://github.com/michaela-liu1225/pyri-pilot-handoff/tree/starter-v1.2) and verbatim in [docs/STARTER_README.md](docs/STARTER_README.md). Relative links in that verbatim copy refer to the original repository root. `MANIFEST.sha256` describes the starter tag, not the modified release.
+`starter-v1.2` preserves the exact starter; changes are separated into evidence, briefing/API, UI, CI, a provenance fix, and documentation commits. The browser follow-up keeps additional fixes and checks separate; `pilot-v0.1.1` identifies the reviewed patch release. The original instructions are preserved at [the starter tag](https://github.com/michaela-liu1225/pyri-pilot-handoff/tree/starter-v1.2) and verbatim in [docs/STARTER_README.md](docs/STARTER_README.md). Relative links in that verbatim copy refer to the original repository root. `MANIFEST.sha256` describes the starter tag, not the modified release.
 
 ```sh
 git log --reverse --oneline starter-v1.2..main
 git diff --stat starter-v1.2..main
 ```
 
-Known limits: browser visual/accessibility checks and a screen recording remain unfinished because the connected browser could not be controlled. Drafts survive in-app changes, not a page reload. The map is static site context when viewing a saved handoff. Shared login, client-supplied evidence snapshots, single-instance SQLite, no tenant authorization or backup/restore automation, and a temporary tunnel make this an assessment demo. There is no tamper-proof audit guarantee or production uptime commitment.
+Known limits: Chromium desktop and emulated phone/tablet layouts were checked; Safari/Firefox, real-device and full accessibility audits, a user study and a screen recording remain outside this review. Drafts survive in-app changes, not a page reload. The map is static site context when viewing a saved handoff. Shared login, client-supplied evidence snapshots, single-instance SQLite, no tenant authorization or backup/restore automation, and a temporary tunnel make this an assessment demo. There is no tamper-proof audit guarantee or production uptime commitment.
 
 ## Next paid-pilot milestone
 
