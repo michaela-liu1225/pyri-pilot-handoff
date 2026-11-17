@@ -223,6 +223,8 @@ test("mobile and tablet controls wrap; long-note feedback and saving remain visi
   for (const viewport of [{ width: 390, height: 844 }, { width: 375, height: 812 }, { width: 768, height: 1024 }]) {
     const page = await workspace(t, viewport, viewport.width < 600);
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    await insideViewport(page, "#title");
+    await insideViewport(page, "#go-handoff");
     await page.getByRole("button", { name: "Write handoff", exact: true }).click();
     const longNote = "A".repeat(2000);
     await page.getByLabel("Operator note", { exact: true }).fill(longNote);

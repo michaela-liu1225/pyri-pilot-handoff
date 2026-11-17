@@ -458,7 +458,7 @@ footer {
   .workspace {
     height: auto;
     grid-template-columns: 240px 1fr;
-    grid-template-areas: "context map" "decision decision";
+    grid-template-areas: "decision decision" "context map";
   }
   .context-pane {
     grid-area: context;
