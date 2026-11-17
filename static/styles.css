@@ -171,6 +171,8 @@ input {
 }
 .workspace {
   display: grid;
+  /* Late history rows must not anchor mobile scrolling to the following map. */
+  overflow-anchor: none;
   grid-template-columns: 220px minmax(330px, 1fr) 430px;
   min-height: 660px;
   height: calc(100vh - 176px);

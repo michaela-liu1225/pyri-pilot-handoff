@@ -5,6 +5,7 @@ const $ = (id) => document.getElementById(id);
 const siteMap = createSiteMap();
 const drafts = new Map();
 let displayed = null, loadGeneration = 0, savedView = false, activeKey = "", saving = null;
+let historyGeneration = 0;
 
 async function request(url, options = {}) {
   const response = await fetch(url, options);
@@ -49,8 +50,12 @@ function show(briefing, savedAt) {
 }
 
 async function loadSaved(generation) {
-  const items = await request("/api/sites/" + $("site").value + "/handoffs");
-  if (generation !== loadGeneration) return;
+  const requestGeneration = ++historyGeneration;
+  const current = () => generation === loadGeneration && requestGeneration === historyGeneration;
+  let items;
+  try { items = await request("/api/sites/" + $("site").value + "/handoffs"); }
+  catch (error) { if (current()) throw error; else return; }
+  if (!current()) return;
   $("saved").replaceChildren();
   for (const handoff of items) {
     const button = document.createElement("button");
@@ -163,7 +168,10 @@ $("save").onclick = async () => {
     if (generation === loadGeneration) handoffMessage("Could not save handoff: " + error.message);
   } finally {
     if (saving === snapshot) saving = null;
-    if (generation === loadGeneration) updateControls();
+    if (generation === loadGeneration) {
+      updateControls();
+      $("handoff-message").scrollIntoView({ block: "nearest" });
+    }
   }
 };
 

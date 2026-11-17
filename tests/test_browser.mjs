@@ -239,3 +239,48 @@ test("mobile and tablet controls wrap; long-note feedback and saving remain visi
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
   }
 });
+
+test("a slow older history response cannot hide save feedback or replace the newest record", async (t) => {
+  const page = await workspace(t, { width: 390, height: 844 }, true);
+  await page.getByRole("button", { name: "Write handoff", exact: true }).click();
+  for (let index = 0; index < 6; index++) {
+    await page.getByLabel("Operator note", { exact: true }).fill("History example " + index + ": verify the route and local telemetry before assigning field checks.");
+    await save(page);
+  }
+  for (const staleFails of [false, true]) {
+    let release, captured;
+    const gate = new Promise((resolve) => { release = resolve; });
+    const capture = new Promise((resolve) => { captured = resolve; });
+    let delayed = false;
+    await page.route("**/api/sites/upper-alder/handoffs", async (route) => {
+      if (route.request().method() === "GET" && !delayed) {
+        delayed = true;
+        const previous = await route.fetch();
+        captured();
+        await gate;
+        await route.fulfill(staleFails
+          ? { status: 503, json: { detail: "Obsolete history failure" } }
+          : { response: previous });
+      } else await route.continue();
+    });
+    try {
+      await page.getByRole("button", { name: "Refresh briefing", exact: true }).click();
+      await ready(page);
+      await capture;
+      await page.getByRole("button", { name: "Write handoff", exact: true }).click();
+      await page.getByLabel("Operator note", { exact: true }).fill("The newest handoff must remain visible when an older history response arrives later.");
+      const saved = await save(page);
+      const oldHistoryResponse = page.waitForResponse((response) => response.request().method() === "GET" && response.url().endsWith("/handoffs"));
+      release();
+      await oldHistoryResponse;
+      await page.evaluate(() => new Promise(requestAnimationFrame));
+      assert.equal(await page.locator('button[title="Handoff ' + saved.id + '"]').count(), 1);
+      await insideViewport(page, "#handoff-message");
+      await insideViewport(page, "#save");
+      assert.doesNotMatch(await page.locator("#message").innerText(), /Saved handoffs could not be loaded/);
+    } finally {
+      release();
+      await page.unroute("**/api/sites/upper-alder/handoffs");
+    }
+  }
+});
