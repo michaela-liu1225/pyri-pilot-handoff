@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "DOM workflow checks only; the application has no Node build step.",
+  "description": "DOM and real-browser workflow checks; the application has no Node build step.",
   "scripts": {
-    "test:ui": "node --experimental-vm-modules --test tests/test_ui.mjs"
+    "test:ui": "node --experimental-vm-modules --test tests/test_ui.mjs",
+    "test:browser": "node --test tests/test_browser.mjs"
   },
   "devDependencies": {
-    "jsdom": "26.1.0"
+    "jsdom": "26.1.0",
+    "playwright": "1.65.1"
   }
 }
