@@ -1,99 +1,103 @@
-# Ship the next pilot site
+# Upper Alder: evidence-led shift handoff
 
-**Candidate release v1.2 | 3-4 hours | Four-hour cap | AI/agentic tools welcome**
+Upper Alder now has a usable briefing and persistent handoff alongside the existing Pine Ridge journey. The duty lead sees reported access constraints, the age and quality of local sensor evidence, and checks to carry into the next shift. The supplied reserve map stays in place.
 
-## Start here
+- [Live assessment demo](https://connectivity-yea-stick-join.trycloudflare.com) — username `reviewer`; password shared privately. The temporary URL requires the host computer, app and tunnel to remain running.
+- [Source repository](https://github.com/michaela-liu1225/pyri-pilot-handoff) — private; reviewers need access or a source archive.
+- [10-minute review guide](docs/REVIEW_GUIDE.md), [verification record](docs/VERIFICATION.md), [time and AI process](docs/PROCESS.md).
 
-Read this README and the short [CUSTOMER.md](CUSTOMER.md), then run the starter. Before implementing your chosen sources, read the **Two evidence cutoffs** and **Failure and recovery controls** sections in [DATA.md](DATA.md), and the relevant entries in [SOURCE_CATALOG.md](SOURCE_CATALOG.md).
+This is a historical tabletop exercise. The reserve, sensors, reports and assessments are fictional or simulated. The application does not predict fire arrival, damage, or safe access.
 
-Use [DEPLOYMENT.md](DEPLOYMENT.md) when ready to deploy and [HANDOFF_TEMPLATE.md](HANDOFF_TEMPLATE.md) when preparing your submission. [MAP.md](MAP.md), [CALDOR_DATA.md](CALDOR_DATA.md) and detailed provenance are reference material to consult as needed; you do not need to read every dataset specification end to end.
+## Try the changed journey
 
-## The customer and the task
+1. Select **Upper Alder → Afternoon handoff**. Intake Spur's blockage report needs attention; a later unverified view of the main road does not establish reopening of the spur.
+2. Inspect **Local sensor evidence**. NODE-03 is 35 minutes old; NODE-02 has 11 missing samples; NODE-01's two flagged 87 °C readings are excluded from reliable readings and trends.
+3. Open the assessment details: Meadow Yard's **0%** differs from North Cache's **Not assessed**. Percentages describe a fictional footprint, not damage probability.
+4. Write a note or explicitly **Add suggested checks**, then save. Reopen the handoff: the original evidence and note are read only, with the historical cutoff and actual save time shown separately.
+5. Return to replay. Switch weather to **Unavailable fixture**, **Stale fixture**, then **Normal**. Core evidence and the unsaved draft survive; previously saved evidence remains unchanged. Switch to Pine Ridge to check compatibility.
 
-A pilot customer is adding **Upper Alder Timber Reserve** as a second protected site. An incoming duty lead needs to see what needs attention, what evidence they can trust, what still needs verification, and a useful handoff from the previous shift. Coverage is patchy, reports arrive late, and an optional weather feed can fail.
+| Cutoff | UTC | Scenario local time |
+| --- | --- | --- |
+| Morning briefing | 2021-08-30 18:00 | Aug 30, 11:00 PDT |
+| Afternoon handoff | 2021-08-31 00:00 | Aug 30, 17:00 PDT |
 
-Extend this existing application to support that journey. **Pine Ridge is the working first site: preserve its briefing and saved-handoff journey.** Upper Alder's site configuration, AOI, evidence feeds and storage plumbing exist; its briefing deliberately returns HTTP 501 until you implement it. The starter uses FastAPI, a small browser UI and SQLite. It is a purpose-built stand-in for working in an existing product, not a production Pyri repository. Keep the supplied backend and working journey; you may refactor or use another frontend approach if useful.
+The interface displays UTC explicitly. Evidence must have been **available** by the cutoff; an earlier observation alone is insufficient. Stale means older than three nominal sensor intervals (15 minutes here), or 90 minutes for airport weather. These are disclosed demo quality rules, not hazard thresholds.
 
-The Caldor Fire is historical context. Both sites, their assets, reports, plans and exercise assessments are fictional. This is a tabletop workflow, not a fire forecast or operational safety system. The timber reserve is the thing to protect; the historical fire is context.
+## What changed and where
 
-## Supplied map workspace
+The starter already supplied FastAPI, raw feeds, site/context configuration, the Leaflet map and local assets, shared demo login, validated handoff endpoints, SQLite storage, weather controls and Pine Ridge. Upper Alder's briefing returned HTTP 501.
 
-The starter follows Pyri Platform's central map and side-panel layout, with the reserve boundary, four assets and three sensor locations already mapped. Pan, zoom, fit, context toggles and selection are included. Map libraries, fonts and a coarse terrain reference are bundled locally: no map API key or runtime network dependency is required. See [MAP.md](MAP.md). The map is provided infrastructure; focus your time on the duty lead's evidence and handoff workflow.
+| Contribution | Entry points |
+| --- | --- |
+| Availability filtering, route resolution, packet quality/deduplication, gaps and freshness | [`evidence.py`](evidence.py): `available_records`, `route_briefings`, `sensor_briefings`, `assessment_briefings`, `weather_context` |
+| New reserve briefing, ordered attention and authored-plan links | [`briefings.py`](briefings.py): `reserve_briefing`; dispatch/logging in [`app.py`](app.py) |
+| Source disclosures, uncertainty and saved-state display | [`static/briefing.js`](static/briefing.js), [`index.html`](index.html), [`static/styles.css`](static/styles.css) |
+| Draft preservation, explicit suggestions, immutable saved views and stale-response protection | [`static/app.js`](static/app.js) |
+| Focused evidence/API/DOM checks and CI | [`tests/test_evidence.py`](tests/test_evidence.py), [`tests/test_upper_alder.py`](tests/test_upper_alder.py), [`tests/test_ui.mjs`](tests/test_ui.mjs), [workflow](.github/workflows/verify.yml) |
 
-## What a complete small submission does
+The supplied `static/map.js`, data and storage implementation are retained. No new map engine or risk model was introduced. Source records remain packaged locally; no external dataset was added. Original attribution and provenance remain in [SOURCE_CATALOG.md](SOURCE_CATALOG.md), [CALDOR_DATA.md](CALDOR_DATA.md) and `data/`.
 
-1. **Brief the new site's duty lead.** Show the protected reserve, what needs attention and why, using at least two supplied evidence sources. **At least one must be a satellite or point-sensor feed used in the working result**, not only discussed in the README. The supplied Sentinel-2, Landsat-8, simulated VIIRS-like detections or simulated point-sensor readings qualify. Relate the evidence to the reserve's authored plan or access constraint. Inspect the multi-source catalog and compare at least one satellite source with the point sensors in your scope decision: explain what you used, what you excluded, and why. You may exclude individual sources with a reason, but must implement at least one satellite or point-sensor feed. You need not integrate every layer. Keep the supplied AOI map pane with the reserve boundary, assets and sensor locations. Choose your evidence overlays freely; cards, tables and charts can complement the map. Static map geometry and sensor-location markers alone do not count as the two evidence sources.
-2. **Make evidence trustworthy.** Show sources, relevant times and uncertainty. Support the supplied morning and afternoon cutoffs. Filter by `available_at`, not only `observed_at`; distinguish no assessment from a numeric zero and an unverified observation from a confirmed one. Keep the retrospective final perimeter out of decision evidence. Explain any heuristic; no validated fire-arrival or damage model is supplied.
-3. **Leave a persistent handoff.** Save the operator's note together with a snapshot of the evidence the user saw. Reopen that saved state after an app restart. The generic handoff API and SQLite persistence are already provided.
-4. **Run and recover.** Demonstrate a running deployment, with reproducible steps, a health check and useful logs. Exercise an unavailable or stale optional weather feed and show recovery without losing the core briefing or saved handoff. Preserve the first site. The supplied temporary HTTPS preview is an acceptable assessment deployment; explain its limits for a paying customer. You may use another host, but spending money is not expected.
-5. **Show ownership and verify a consequential behavior.** Identify what the starter already did, what you changed, and the files or functions behind that change. Keep the supplied baseline tests passing and add focused tests for a candidate-added core result and a failure/uncertainty case. Trace one important displayed claim through your code to its data and a check you performed. Include at least one independent check of AI output or an assumption you investigated yourself.
+## Source choices and trade-offs
 
-The feed controls and persistence plumbing are supplied so you can focus on a useful release. The pack includes real Sentinel-2 optical and Landsat-8 thermal extracts, simulated VIIRS-like detections and five-minute point sensors, plus real hourly/daily weather and terrain. See [SOURCE_CATALOG.md](SOURCE_CATALOG.md) for differences in resolution, cadence, quality and availability; [CUSTOMER.md](CUSTOMER.md) for competing requests; and [DATA.md](DATA.md) for replay rules. You do not need every dataset, a new model, a new map engine, alerts, a multi-tenant system or production-grade infrastructure.
+| Source | Choice and reason |
+| --- | --- |
+| Simulated point sensors | **Implemented.** Five-minute point readings, normally one-minute delivery, directly expose telemetry age and quality for this shift. Only three local points; gaps, duplicates, suspect spikes and late packets prevent any reserve-wide claim. |
+| Fictional field reports | **Implemented.** Route-specific reports directly constrain the authored intake/access checks. Observation, delivery, role and unverified scope remain visible. A reported status still needs operational verification. |
+| Fictional overlap assessment | **Implemented as secondary context.** Preserve the supplied four values and explicit missingness; do not turn them into a risk score. |
+| Archived airport weather | **Optional context with stale/unavailable/recovery states.** Station measurements have an assumed ten-minute delivery lag; they do not describe the whole reserve. |
+| Sentinel-2 optical samples | **Deferred.** Native 10 m reflectance / 20 m classification, but the supplied extract is sparse samples about 385 × 396 m apart, not complete imagery. The Aug 29 scene becomes available only at Aug 30 18:39:19 under the assumed +24-hour lag. Useful vegetation context, less direct than access/telemetry for this handoff; cloud/smoke and sampling limit interpretation. |
+| Landsat-8 thermal samples | **Deferred.** Native 100 m thermal data on a 30 m product grid; supplied Aug 5/21 scenes and assumed +7-day availability make this older context. Land-surface temperature cannot be substituted for point air temperature. |
+| Simulated VIIRS-like detections | **Deferred.** Four coarse 375 m anomaly points with a 55-minute lag; insufficient to establish route passability, a perimeter or arrival time. These are not NASA observations. |
 
-## Optional additional data
+Static terrain and locations remain map context and are not counted as the two implemented evidence sources. The retrospective final fire perimeter is excluded from the briefing. Alerts, satellite overlays, a forecast model and multi-user workflows were deferred to keep the release focused on a saved, explainable handoff.
 
-You may supplement the supplied materials with relevant, publicly available geospatial data that permits your intended use. **The supplied package is sufficient for a strong submission.** Additional sources are optional and do not automatically improve your score; their usefulness and reliability matter, not their number.
+## Run, test and deploy
 
-- Discovery, preparation and integration count toward the four-hour cap. No paid services or purchases are expected.
-- Supplement the common exercise: retain the fictional reserve, assets, scenario and required use of at least two supplied evidence sources, including a satellite or point-sensor feed.
-- Document the source URL or dataset identifier, reuse licence and attribution, observation/validity dates, availability time, retrieval date, resolution or spatial support, significant transformations and limitations. Public accessibility alone does not establish reuse rights.
-- Respect the historical replay cutoffs. If historical availability cannot be established, label the uncertainty and either exclude the source from as-of decision evidence or state a defensible exercise assumption. Later-created data may appear as clearly labelled background or retrospective context, not evidence claimed to have been available during the replay. A modern road map does not establish historical access conditions.
-- Make the result reproducible: include a small cached extract where licensing permits, or clear retrieval instructions. Keep the core briefing and handoff usable if the external service is unavailable, and disclose any demo dependency or missing evidence.
-- Explain which user need the additional data addresses and how you verified that it improves the result. Choosing not to add a source is equally valid.
-
-## Timebox and delivery
-
-Spend **3-4 hours total** on reading/planning, implementation, tests, deployment, README and presentation preparation. Stop at four hours, submit what works, and clearly label unfinished work. There is no bonus for exceeding the cap. If setup or access is broken, contact us promptly rather than consuming the whole block debugging the environment.
-
-One possible allocation: 20 minutes inspect and choose scope; 90-120 minutes implement; 35-45 minutes verify and deploy; 25-40 minutes document and prepare the demo. This is guidance, not an additional scoring rule.
-
-**Submit within seven calendar days of the invitation email being sent.** Reply to that email if timing is difficult. Send:
-
-- The live demo URL and access instructions (share its password privately), plus a repository link or ZIP of your source and tests. Keep the demo available for the review call; a temporary URL may need restarting.
-- A short README using [HANDOFF_TEMPLATE.md](HANDOFF_TEMPLATE.md): scope, decisions, how to run/deploy/test, limitations, elapsed time, AI tools and one verified example, and the next step toward a commercial pilot.
-- A brief note of what remains unfinished. If your host cannot stay online, include a short screen recording as backup and be ready to run it live; this does not replace the running-service demonstration.
-
-Use a private repository or source archive if convenient. Give the reviewers access and do not commit demo credentials or local runtime databases. The provided exercise code and fictional fixtures may be used and modified for this assessment, including with AI tools. Keep the historical source attribution with the data.
-
-## Separate 30-minute presentation
-
-The audience includes **technical and non-technical team members**. Prepare about **10 minutes of presentation and live demo**, followed by **20 minutes of discussion**. App plus README is enough; no slide deck is required.
-
-- **End-user and commercial story:** show an incoming duty lead what needs attention, what they can trust and what they still need to verify. Complete the briefing-to-handoff journey, explain the value to a paying customer and give one observable measure of usefulness.
-- **Technical delivery and process:** distinguish supplied functionality from your changes. Trace one important claim in your addition through data, code and a check you performed. Demonstrate your modified application running, including a failure/recovery case, and explain how you used and independently checked AI output. If you added external data, explain the gap it fills, its verification and what happens if its source is unavailable.
-- **Next step:** explain the most important gap before a paid pilot, how another site would be added, and a pragmatic priority among reliability, onboarding, security, cost and support. You are not expected to implement that whole roadmap in this exercise.
-
-We will ask about your choices and introduce one changed customer constraint for discussion; no additional live implementation is expected. We assess ownership/process, systems judgment, evidence/verification, and product/operability (including commercial judgment). More code, more data layers or a particular AI tool does not earn extra credit.
-
-## Run the existing starter
-
-Python 3.11+ is supported. From this directory:
+Python 3.11+; verified locally with Python 3.13.9 and in CI with Python 3.12. No frontend build is required.
 
 ```sh
 python -m venv .venv
-```
-
-Activate it: Windows PowerShell `.venv\Scripts\Activate.ps1`; macOS/Linux `source .venv/bin/activate`. If activation is restricted on Windows, use `.venv\Scripts\python.exe` in place of `python` below.
-
-```sh
+source .venv/bin/activate
 python -m pip install -r requirements.txt
 python -m unittest discover -s tests -v
 python -m uvicorn app:app --host 127.0.0.1 --port 8000
 ```
 
-Open http://127.0.0.1:8000. Upper Alder opens with a working map and an unfinished briefing. Try Pine Ridge and save a handoff, then return to Upper Alder. Its 501 briefing response is the intended task boundary; the map should remain available. API reference: http://127.0.0.1:8000/docs. The default local development server has no login; keep it on loopback. Use [DEPLOYMENT.md](DEPLOYMENT.md) before exposing a demo.
+Open `http://127.0.0.1:8000`. This development command has no login by default; keep it on loopback. For Windows, activation and equivalent commands are in [the original README](https://github.com/michaela-liu1225/pyri-pilot-handoff/blob/starter-v1.2/README.md).
 
-## Start editing
+Optional DOM tests require Node 20+ (CI uses 22). With the Python environment active:
 
-| File | Role |
-| --- | --- |
-| `briefings.py` | Existing first-site logic and the explicit Upper Alder task |
-| `index.html`, `static/app.js`, `static/styles.css` | Site/snapshot selectors, briefing and handoff UI, with a Platform-style shell |
-| `static/map.js`, `MAP.md` | Provided AOI map and extension guidance; overlay choices remain yours |
-| `app.py` | Site/context/feed API, demo login and validated handoff endpoints |
-| `storage.py` | Persistent append-only SQLite handoffs |
-| `data/sites.json` | Site registry; avoid proliferating site-specific branches as you extend it |
-| `tests/test_baseline.py` | First-site compatibility, persistence, validation, replay controls and login checks |
-| `DEPLOYMENT.md`, `scripts/`, `Dockerfile`, `compose.yaml` | Runnable deployment paths and failure checks |
+```sh
+npm ci --ignore-scripts --no-fund --no-audit
+npm run test:ui
+```
 
-Everything required for the evidence is packaged locally. Network access is needed for dependencies, optional AI tooling, a remote preview and any optional external data you choose to retrieve. See `MANIFEST.sha256` for the frozen release contents.
+The suite contains **21 Python tests** (all 9 supplied tests retained) and **5 DOM workflow tests**. The latter exercise the actual controller/renderer with transport and the supplied map stubbed; they do not constitute visual browser QA. See [verification](docs/VERIFICATION.md) for the live service restart and HTTPS checks.
+
+For a protected demo, stop the development server first:
+
+```sh
+python scripts/setup_demo.py
+python scripts/serve_demo.py
+# In a second terminal with cloudflared installed:
+cloudflared tunnel --no-autoupdate --protocol http2 --url http://127.0.0.1:8000
+```
+
+Setup prints a new private password and writes only its hash to ignored `.env`; keep the password out of Git. Handoffs live in ignored `runtime/handoffs.sqlite3`. Both processes must stay running. `/healthz` checks app/storage; logs include site, cutoff ID and weather state. Detailed restart, storage and Docker alternatives: [DEPLOYMENT.md](DEPLOYMENT.md). The delivered instance uses the Python route and cloudflared 2026.11.1 over HTTP/2.
+
+## Review history and limits
+
+`starter-v1.2` preserves the exact starter; changes are separated into evidence, briefing/API, UI, CI, a provenance fix, and documentation commits. The original instructions are preserved at [the starter tag](https://github.com/michaela-liu1225/pyri-pilot-handoff/tree/starter-v1.2) and verbatim in [docs/STARTER_README.md](docs/STARTER_README.md). Relative links in that verbatim copy refer to the original repository root. `MANIFEST.sha256` describes the starter tag, not the modified release.
+
+```sh
+git log --reverse --oneline starter-v1.2..main
+git diff --stat starter-v1.2..main
+```
+
+Known limits: browser visual/accessibility checks and a screen recording remain unfinished because the connected browser could not be controlled. Drafts survive in-app changes, not a page reload. The map is static site context when viewing a saved handoff. Shared login, client-supplied evidence snapshots, single-instance SQLite, no tenant authorization or backup/restore automation, and a temporary tunnel make this an assessment demo. There is no tamper-proof audit guarantee or production uptime commitment.
+
+## Next paid-pilot milestone
+
+Run a supervised duty-lead trial using agreed source/verification rules and a supported hosted instance with named access, backup/restore and basic availability monitoring. Measure **time to complete a correct handoff without omitting predefined access/telemetry checks**, plus omissions and misunderstood evidence. No improvement has yet been measured. This milestone tests usefulness and supportability before adding sales-driven map layers or alerts.
+
+For a third site, add its registry, geometry, route/asset plans and feed adapters, then reuse the evidence functions and generic reserve composer with fixture-based acceptance checks. The current HTTP loader still explicitly binds Upper Alder feeds/context; it must become a per-site registry. Full plug-and-play onboarding is not claimed. [Process notes](docs/PROCESS.md) record elapsed time and the independent raw-data check of AI-assisted work.
