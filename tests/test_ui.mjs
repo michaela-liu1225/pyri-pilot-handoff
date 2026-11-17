@@ -34,6 +34,7 @@ async function until(predicate) {
 
 async function workspace(t, { delayUpper = false } = {}) {
   const dom = new JSDOM(readFileSync(root + "index.html", "utf8"), { url: "http://localhost/", runScripts: "outside-only" });
+  dom.window.HTMLElement.prototype.scrollIntoView = function () {};
   t.after(() => dom.window.close());
   const state = { saved: [], failBriefing: false, failHistoryAfterSave: false, releaseUpper: null, maps: [] };
   const response = (data, status = 200) => ({ ok: status < 400, status, json: async () => structuredClone(data) });
@@ -80,7 +81,7 @@ async function workspace(t, { delayUpper = false } = {}) {
   const write = (text) => { $("note").value = text; $("note").dispatchEvent(new dom.window.Event("input")); };
   const save = async () => {
     $("save").click();
-    await until(() => $("message").textContent.includes("saved") && !$("save").disabled);
+    await until(() => $("handoff-message").textContent.includes("saved") && !$("save").disabled);
   };
   return { dom, $, state, change, write, save };
 }
@@ -156,6 +157,6 @@ test("history reload failure does not misreport a successfully saved handoff", a
   write("Do not submit twice just because the history failed.");
   await save();
   assert.equal(state.saved.length, 1);
-  assert.match($("message").textContent, /was saved, but the history could not refresh/);
-  assert.doesNotMatch($("message").textContent, /Could not save handoff/);
+  assert.match($("handoff-message").textContent, /was saved, but the history could not refresh/);
+  assert.doesNotMatch($("handoff-message").textContent, /Could not save handoff/);
 });

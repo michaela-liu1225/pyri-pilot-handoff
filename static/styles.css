@@ -607,6 +607,12 @@ footer {
 #limits { margin: 18px 0 0; line-height: 1.6; }
 .handoff { background: #f5f8f5; }
 .handoff-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; align-items: center; justify-content: space-between; }
+.handoff-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.handoff-heading h2 { margin-bottom: 0; }
+#go-handoff { margin-top: 12px; }
+#handoff-message { font-size: 12px; line-height: 1.6; margin: 12px 0 0; overflow-wrap: anywhere; }
+#handoff-message:empty { display: none; }
+.saved-preview { display: block; margin-top: 5px; font-weight: 400; }
 textarea[readonly] { background: #eef0ed; color: #465148; }
 .saved { border-color: #d8e1d8; line-height: 1.6; }
 button, summary { transition: background-color 120ms ease, color 120ms ease; }

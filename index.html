@@ -101,12 +101,13 @@
         <p id="map-status" class="map-status" role="status"></p>
       </section>
       <aside class="decision-pane" aria-label="Briefing and handoff">
-        <div class="pane-heading">
+        <div id="briefing-heading" class="pane-heading">
           <span class="eyebrow">Understand & hand over</span>
-          <h2 id="title">Loading briefing…</h2>
+          <h2 id="title" tabindex="-1">Loading briefing…</h2>
           <span id="view-kind" class="view-kind"></span>
           <button id="return-replay" class="secondary" hidden>Return to replay</button>
           <p id="message" role="status" aria-live="polite"></p>
+          <button id="go-handoff" class="secondary">Write handoff</button>
         </div>
         <section class="pane-body briefing">
           <p id="summary"></p>
@@ -147,8 +148,11 @@
           </details>
           <p id="limits" class="muted small"></p>
         </section>
-        <section class="pane-body handoff">
-          <h2>Shift handoff</h2>
+        <section id="handoff-section" class="pane-body handoff">
+          <div class="handoff-heading">
+            <h2>Shift handoff</h2>
+            <button id="review-briefing" class="secondary">Review briefing</button>
+          </div>
           <p class="small muted">Save your note with the evidence shown above. Reopened handoffs retain their original state.</p>
           <label
             >Operator note<textarea
@@ -160,6 +164,7 @@
             <button id="use-suggestions" class="secondary" hidden>Add suggested checks</button>
             <button id="save" disabled>Save handoff</button>
           </div>
+          <p id="handoff-message" role="status" aria-live="polite"></p>
           <h3>Saved handoffs</h3>
           <div id="saved"></div>
         </section>

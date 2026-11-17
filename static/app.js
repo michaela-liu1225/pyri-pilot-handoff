@@ -16,13 +16,25 @@ async function request(url, options = {}) {
 }
 
 function updateControls() {
+  const busy = Boolean(displayed) && saving === displayed;
   $("save").disabled = !displayed || savedView || saving === displayed || !$("note").value.trim();
-  $("note").readOnly = savedView;
+  $("note").readOnly = savedView || busy;
   $("use-suggestions").hidden = !displayed?.suggested_note;
-  $("use-suggestions").disabled = savedView;
+  $("use-suggestions").disabled = savedView || busy;
   $("return-replay").hidden = !savedView;
   $("snapshot").disabled = savedView;
   $("weather").disabled = savedView;
+  $("go-handoff").textContent = savedView ? "View saved note" : "Write handoff";
+}
+
+function handoffMessage(text) {
+  $("handoff-message").textContent = text;
+  if (text) $("handoff-message").scrollIntoView({ block: "nearest" });
+}
+
+function reviewBriefing() {
+  $("briefing-heading").scrollIntoView({ block: "start" });
+  $("title").focus({ preventScroll: true });
 }
 
 function rememberDraft() {
@@ -43,7 +55,12 @@ async function loadSaved(generation) {
   for (const handoff of items) {
     const button = document.createElement("button");
     button.className = "saved";
-    button.textContent = (handoff.evidence_snapshot.snapshot.label || handoff.snapshot_id) + " · Saved " + timestamp(handoff.created_at);
+    const label = document.createElement("strong"), preview = document.createElement("span");
+    label.textContent = (handoff.evidence_snapshot.snapshot.label || handoff.snapshot_id) + " · Saved " + timestamp(handoff.created_at);
+    const note = handoff.operator_note.trim().replace(/\s+/g, " ");
+    preview.className = "saved-preview";
+    preview.textContent = note.length > 120 ? note.slice(0, 120) + "…" : note;
+    button.append(label, preview);
     button.title = "Handoff " + handoff.id;
     button.onclick = () => {
       rememberDraft();
@@ -52,6 +69,8 @@ async function loadSaved(generation) {
       $("note").value = handoff.operator_note;
       show(handoff.evidence_snapshot, handoff.created_at);
       $("message").textContent = "Reopened the original note and evidence. The map shows static site context.";
+      $("handoff-message").textContent = "Saved note · read only. Use Return to replay to create a new handoff.";
+      reviewBriefing();
     };
     $("saved").append(button);
   }
@@ -72,6 +91,8 @@ async function refresh() {
   $("saved").replaceChildren();
   siteMap.clear();
   $("message").textContent = "Loading…";
+  $("handoff-message").textContent = "";
+  document.querySelector(".decision-pane").scrollTop = 0;
   $("map-site").textContent = $("site").selectedOptions[0]?.textContent || "Protected site";
   const mapWork = request("/api/sites/" + site + "/context")
     .then((payload) => { if (generation === loadGeneration) siteMap.render(payload); })
@@ -98,18 +119,24 @@ async function refresh() {
 
 $("refresh").onclick = refresh;
 $("return-replay").onclick = refresh;
+$("go-handoff").onclick = () => {
+  $("handoff-section").scrollIntoView({ block: "start" });
+  $("note").focus({ preventScroll: true });
+};
+$("review-briefing").onclick = reviewBriefing;
 for (const id of ["site", "snapshot", "weather"]) $(id).onchange = refresh;
-$("note").oninput = () => { rememberDraft(); updateControls(); };
+$("note").oninput = () => { rememberDraft(); $("handoff-message").textContent = ""; updateControls(); };
 $("use-suggestions").onclick = () => {
   if (!displayed?.suggested_note || savedView) return;
   const current = $("note").value;
   if (current.includes(displayed.suggested_note)) return;
   const next = current ? current + "\n\n" + displayed.suggested_note : displayed.suggested_note;
   if (next.length > 2000) {
-    $("message").textContent = "Suggested checks would exceed 2,000 characters. Your note has been kept unchanged.";
+    handoffMessage("Suggested checks would exceed 2,000 characters. Your note has been kept unchanged.");
     return;
   }
   $("note").value = next;
+  $("handoff-message").textContent = "";
   rememberDraft();
   updateControls();
   $("note").focus();
@@ -119,20 +146,21 @@ $("save").onclick = async () => {
   const snapshot = displayed, generation = loadGeneration;
   saving = snapshot;
   updateControls();
+  handoffMessage("Saving handoff…");
   try {
     const handoff = await request("/api/sites/" + snapshot.site_id + "/handoffs", {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ snapshot_id: snapshot.snapshot.id, operator_note: $("note").value, evidence_snapshot: snapshot }),
     });
     if (generation !== loadGeneration) return;
-    $("message").textContent = "Handoff " + handoff.id + " saved with this evidence. Reopen it below, including after an app restart.";
+    handoffMessage("Handoff " + handoff.id + " saved with this evidence. Reopen it below, including after an app restart.");
     try { await loadSaved(generation); }
     catch (error) {
-      if (generation === loadGeneration) $("message").textContent = "Handoff " + handoff.id +
-        " was saved, but the history could not refresh. Use Refresh briefing to retry. " + error.message;
+      if (generation === loadGeneration) handoffMessage("Handoff " + handoff.id +
+        " was saved, but the history could not refresh. Use Refresh briefing to retry. " + error.message);
     }
   } catch (error) {
-    if (generation === loadGeneration) $("message").textContent = "Could not save handoff: " + error.message;
+    if (generation === loadGeneration) handoffMessage("Could not save handoff: " + error.message);
   } finally {
     if (saving === snapshot) saving = null;
     if (generation === loadGeneration) updateControls();
