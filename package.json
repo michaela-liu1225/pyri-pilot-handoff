@@ -1,0 +1,13 @@
+{
+  "name": "pyri-pilot-handoff",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "DOM workflow checks only; the application has no Node build step.",
+  "scripts": {
+    "test:ui": "node --experimental-vm-modules --test tests/test_ui.mjs"
+  },
+  "devDependencies": {
+    "jsdom": "26.1.0"
+  }
+}

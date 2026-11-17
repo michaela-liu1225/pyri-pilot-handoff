@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Pyri | Pilot workspace</title>
+    <title>Pyri | Shift briefing and handoff</title>
     <link rel="stylesheet" href="/static/vendor/leaflet/leaflet.css" />
     <link rel="stylesheet" href="/static/styles.css" />
     <script src="/static/vendor/leaflet/leaflet.js" defer></script>
@@ -16,7 +16,7 @@
       </div>
       <div class="workspace-name">Pilot workspace</div>
       <span class="replay-badge">Historical replay</span
-      ><span class="release">Candidate starter · v1.2</span>
+      ><span class="release">Upper Alder · Pilot release</span>
     </header>
     <div class="toolbar">
       <label
@@ -72,10 +72,10 @@
           <h2>Locations</h2>
           <div id="map-objects" aria-label="Mapped locations"></div>
           <div class="context-note">
-            <h2>Your evidence choices</h2>
+            <h2>Reading the map</h2>
             <p>
-              Choose overlays, cards or charts that help the duty lead. No
-              evidence overlays are preselected.
+              Static locations provide context. Review observation times and
+              quality in the briefing before relying on a source.
             </p>
           </div>
         </div>
@@ -104,33 +104,70 @@
         <div class="pane-heading">
           <span class="eyebrow">Understand & hand over</span>
           <h2 id="title">Loading briefing…</h2>
+          <span id="view-kind" class="view-kind"></span>
+          <button id="return-replay" class="secondary" hidden>Return to replay</button>
           <p id="message" role="status" aria-live="polite"></p>
         </div>
         <section class="pane-body briefing">
           <p id="summary"></p>
           <p id="asof" class="muted small"></p>
-          <h3>Evidence</h3>
-          <ul id="evidence"></ul>
+          <section id="attention-section" hidden>
+            <h3>What needs attention</h3>
+            <ol id="attention" class="attention-list"></ol>
+          </section>
+          <div id="reserve-evidence" hidden>
+            <h3>Access for planned checks</h3>
+            <div id="routes"></div>
+            <h3>Local sensor evidence</h3>
+            <p class="small muted">Simulated point observations. Recent readings do not establish reserve-wide conditions.</p>
+            <div id="sensors"></div>
+            <details class="evidence-detail assessment-detail">
+              <summary>Exercise footprint assessment</summary>
+              <div class="detail-body">
+                <p class="small muted">Packaged fictional overlap, not damage probability. Zero differs from no assessment.</p>
+                <table class="assessment-table">
+                  <thead><tr><th scope="col">Protected target</th><th scope="col">Overlap</th></tr></thead>
+                  <tbody id="assessments"></tbody>
+                </table>
+              </div>
+            </details>
+            <details class="evidence-detail">
+              <summary>Authored response steps</summary>
+              <ul id="plans" class="detail-body plan-list"></ul>
+            </details>
+          </div>
           <div id="weather-note" class="notice"></div>
+          <details id="evidence-detail" class="evidence-detail">
+            <summary>Source records (<span id="evidence-count">0</span>)</summary>
+            <ul id="evidence" class="detail-body"></ul>
+          </details>
+          <details id="rules-detail" class="evidence-detail" hidden>
+            <summary>How to interpret this briefing</summary>
+            <ul id="rules" class="detail-body"></ul>
+          </details>
           <p id="limits" class="muted small"></p>
         </section>
         <section class="pane-body handoff">
           <h2>Shift handoff</h2>
+          <p class="small muted">Save your note with the evidence shown above. Reopened handoffs retain their original state.</p>
           <label
             >Operator note<textarea
               id="note"
               maxlength="2000"
               placeholder="What should the next shift check?"
             ></textarea></label
-          ><button id="save" disabled>Save handoff</button>
+          ><div class="handoff-actions">
+            <button id="use-suggestions" class="secondary" hidden>Add suggested checks</button>
+            <button id="save" disabled>Save handoff</button>
+          </div>
           <h3>Saved handoffs</h3>
           <div id="saved"></div>
         </section>
       </aside>
     </main>
     <footer>
-      Tabletop exercise · not an operational safety system. Start with
-      README.md. <a href="/docs">API reference</a>
+      Tabletop exercise · not an operational safety system.
+      <a href="/docs">API reference</a>
     </footer>
   </body>
 </html>

@@ -6,3 +6,4 @@ runtime/
 .pytest_cache/
 *.log
 .tools/
+node_modules/
