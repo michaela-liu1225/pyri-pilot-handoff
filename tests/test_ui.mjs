@@ -134,6 +134,8 @@ test("a failed briefing still allows an existing handoff to be reopened", async 
   state.failBriefing = true;
   $("refresh").click();
   await until(() => $("title").textContent === "Briefing unavailable" && $("saved").querySelector("button"));
+  assert.equal($("evidence-count").textContent, "0");
+  assert.equal($("evidence").children.length, 0);
   $("saved").querySelector("button").click();
   assert.match($("summary").textContent, /reported passable/);
   assert.equal($("note").value, "Saved before source failure.");

@@ -186,6 +186,7 @@ export function renderBriefing(briefing, savedAt) {
 }
 
 export function clearBriefing() {
+  $("evidence-count").textContent = "0";
   for (const id of ["summary", "asof", "limits", "weather-note", "view-kind"]) $(id).textContent = "";
   for (const id of ["attention", "routes", "sensors", "assessments", "plans", "evidence", "rules"]) $(id).replaceChildren();
   $("attention-section").hidden = true;
