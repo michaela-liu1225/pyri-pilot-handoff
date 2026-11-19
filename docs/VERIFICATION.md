@@ -21,7 +21,22 @@
 | Optional weather unavailable/stale/recovered | Preserve core evidence and allow saving while unavailable. Preserve original saved weather after recovery and restart. |
 | Browser request finishes after user changes site | Discard obsolete response; retain the current site's briefing/map. DOM test. |
 
-The raw-fixture cross-check used Python's `csv`, `json` and `datetime` only, with no imports from `app`, `briefings` or `evidence`. Values above were checked directly against source rows and asserted as fixed expectations, rather than taking the tested function's output as the expected answer. This is independent of the application calculation, not a separate human review.
+The raw-fixture cross-check used Python's `csv`, `json` and `datetime` only, with no imports from `app`, `briefings` or `evidence`. Values above were checked directly against source rows and asserted as fixed expectations, rather than taking the tested function's output as the expected answer. The candidate manually compared the consequential report and sensor timestamps with the running afternoon briefing, confirming the blocked route and 35-minute-old NODE-03 reading. This is a focused human check of the AI-assisted result, not scientific validation.
+
+## Candidate manual review
+
+The candidate confirms that manual verification took place on the original work day, 17 November 2026. This section supplements the earlier documentation with the candidate's account.
+
+| Check performed by the candidate | Confirmed result |
+| --- | --- |
+| Raw FR-03/04/05 compared with the afternoon UI | Matching observation/delivery times; FR-04 labelled unverified; FR-05 arrives after the cutoff. |
+| Raw NODE-03-089 compared with the UI | Matching packet ID, 28.6 C, 23:25 observation, 23:26 delivery, 35-minute age and stale state. |
+| Save and reopen an Upper Alder handoff | Saved note reopened with read-only controls, including after a page refresh. |
+| Weather unavailable, then normal, then reopen | Candidate confirmed the saved handoff retained unavailable weather after recovery. |
+| Pine Ridge save/reopen | Candidate confirmed the original site's journey completed successfully. |
+| Python suite run in VS Code | Candidate reported 22 tests and OK after personally running the suite. Codex separately reran the same 22 tests successfully. |
+
+The candidate made the final scope and source decisions after discussion with Codex. Codex supplied implementation assistance, review guidance, expected outcomes and example note wording; the candidate performed the manual actions and comparisons above. Application-process restart and automated browser checks were performed with Codex. See [PROCESS.md](PROCESS.md) for the full allocation of work.
 
 ## Running service, 17 November 2026 UTC
 

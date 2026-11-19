@@ -2,9 +2,9 @@
 
 Upper Alder now has a usable briefing and persistent handoff alongside the existing Pine Ridge journey. The duty lead sees reported access constraints, the age and quality of local sensor evidence, and checks to carry into the next shift. The supplied reserve map stays in place.
 
-- [Live assessment demo](https://connectivity-yea-stick-join.trycloudflare.com) — username `reviewer`; password shared privately. The temporary URL requires the host computer, app and tunnel to remain running.
+- [Live assessment demo](https://disc-reaches-gordon-span.trycloudflare.com) — username `reviewer`; password shared privately. The temporary URL requires the host computer, app and tunnel to remain running.
 - [Source repository](https://github.com/michaela-liu1225/pyri-pilot-handoff) — public; no GitHub login is needed to read the source. The live demo uses its separate shared login.
-- [10-minute review guide](docs/REVIEW_GUIDE.md), [verification record](docs/VERIFICATION.md), [browser review and screenshots](docs/BROWSER_QA.md), [time and AI process](docs/PROCESS.md).
+- [Verification record](docs/VERIFICATION.md), [browser review and screenshots](docs/BROWSER_QA.md), [time and AI process](docs/PROCESS.md).
 
 This is a historical tabletop exercise. The reserve, sensors, reports and assessments are fictional or simulated. The application does not predict fire arrival, damage, or safe access.
 
@@ -87,7 +87,15 @@ cloudflared tunnel --no-autoupdate --protocol http2 --url http://127.0.0.1:8000
 
 Setup prints a new private password and writes only its hash to ignored `.env`; keep the password out of Git. Handoffs live in ignored `runtime/handoffs.sqlite3`. Both processes must stay running. `/healthz` checks app/storage; logs include site, cutoff ID and weather state. Detailed restart, storage and Docker alternatives: [DEPLOYMENT.md](DEPLOYMENT.md). The delivered instance uses the Python route and cloudflared 2026.11.1 over HTTP/2.
 
+## Time, AI use and manual review
+
+My total assessment-work estimate is **3 hours 25 minutes**, including manual checks and presentation preparation. The first retained clock reading is **17 November 2026, 16:46:30 UTC**; later review sessions are recorded in [PROCESS.md](docs/PROCESS.md).
+
+I made the scope, source-selection and implementation trade-off decisions after discussing options with Codex. Codex assisted with analysis, implementation, tests, deployment and documentation. I manually compared FR-03/04/05 and NODE-03-089 with the displayed briefing, checked saved handoffs and weather recovery, verified the Pine Ridge journey, and personally ran the Python suite (22 tests, OK). The [process record](docs/PROCESS.md) distinguishes these checks from agent-executed checks and explains the rejected observation-only assumption.
+
 ## Review history and limits
+
+The manual-verification documentation supplements the record of my checks on the original work day, 17 November.
 
 `starter-v1.2` preserves the exact starter; changes are separated into evidence, briefing/API, UI, CI, a provenance fix, and documentation commits. The browser follow-up keeps additional fixes and checks separate; `pilot-v0.1.1` identifies the reviewed patch release. The original instructions are preserved at [the starter tag](https://github.com/michaela-liu1225/pyri-pilot-handoff/tree/starter-v1.2) and verbatim in [docs/STARTER_README.md](docs/STARTER_README.md). Relative links in that verbatim copy refer to the original repository root. `MANIFEST.sha256` describes the starter tag, not the modified release.
 
